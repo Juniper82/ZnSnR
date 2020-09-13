@@ -1,0 +1,88 @@
+---
+title: "STAT 401"
+author: "Zackary Scalyer"
+date: "9/13/2020"
+output: html_document
+---
+
+<!-- use regular html style comments like this -->  
+<!-- then we can make notes and comments that will not be included in the final document -->  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+<!-- above is the first code chunck, starts with ```{}, and ends with ```
+{r setup} this makes r as the code chunck engine with name setup, 
+everything after the comma is for CHUNK OPTIONS, 
+include=FALSE will not include the code in doc after running 
+-->  
+
+
+# Homework #2  
+<!-- a level one headder starts with one # -->
+
+Page 47-49  #1, 3, 4, 5, 11, 14, 16, 17, 19   
+<!-- any test outside of a code chunck will be normal text in the final doc,
+two spaces at the end of a line, or a empty line, will make a line brake in the final doc-->  
+
+## Problem 1  
+<!-- a level two headder starts with 2 #s -->  
+
+> An experiment is conducted to determine the optimal time and temperature
+combination for baking a cake. The response variable of interest is taste.
+Four batches of cake will be baked separately at each combination of baking
+times (25 and 30 minutes) and temperature settings (275 o F, 300 o F, and 325 o F).
+
+<!-- block quotes starts with >.
+note that there is no spaces at the end of each line so the final document keeps the text together.-->  
+
+```{r}
+# inline comments in code chunck work the same as r normaly does
+times = c(25,30)
+temps = c(275,300,325)
+combos = expand.grid(times,temps)
+dat1 = data.frame(times,temps,'t'=combos[1:6,1],'T'=combos[1:6,2])
+dat1
+```
+
+<!-- to insert an new code chunk press ctrl+alt+i -->
+
+(a) What are the experimental units?  
+
+The experimental units are minutes for the time and $^oF$ for temperature.  
+
+<!-- anything wrapted in $ is for LaTex expressions -->
+
+[LaTeX ref link](https://en.wikibooks.org/wiki/LaTeX/Mathematics)  
+
+<!-- you can link websites within the document. -->  
+
+**I think your awanser for a is not correct**  
+
+<!-- wrapping text with two * will make the text bold, one * will make text italc -->  
+
+*An experimental unit is one member of a set of entities being studied. The experimental units here are batches of cake. We have 4 batches per combination of baking times and temp so we should have $4 \times 2 \times 3 = 24$ experimental units.*  
+
+(b) What are the factors in this experiment?  
+
+The factors in this experiment is time and temperature.  
+
+(c) State the levels of each factor.  
+
+The time has two levels, 25 and 30 minutes and the temperature has three levels, 275, 300 and 325 $^oF$.  
+
+(d) List all the treatments in this experiment.  
+
+There are not any treatments in this experiment since it is not a one-factor study.  
+
+**I think your awanser for d is not correct**  
+
+*Treatments are the combenations of the experimental factors of intrest. A a one-factor study means the factor levels and treatments are the same. A two-factor study has one treatment for each combentation of factor levels. Here we have six treatments.*  
+
+
+
+
+
+
