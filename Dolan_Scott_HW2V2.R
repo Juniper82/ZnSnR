@@ -67,16 +67,16 @@ cat(paste0('The contrasts representing the effects of each of the five areas
 
 # Use LaTeX to create an image of the equation representing the 
 # contrast/solution to b):
-plot(TeX("$\\frac{\\mu_1 + \\mu_2}{2}\\,-, 
+plot(TeX("$\\frac{\\mu_1 + \\mu_2}{2}\\,- 
          \\frac{\\mu_3+\\mu_4+\\mu_5}{3}$"),cex=1)
 
- # 4. An article reports on the results of a cloud-seeding experiment. 20 The 
- # question of interest is whether cloud seeding with silver nitrate increases 
- # rainfall. Out of 52 clouds, 26 were randomly selected for seeding, with the
- # remaining 26 serving as controls. The rainfall measurements, in acre-feet, 
- # are given in CloudSeedingData.txt. Use the R commands given in Example 1.8-4 
- # to construct a comparative boxplot and comment on possible differences in 
- # rainfall between seeded and unseeded clouds.
+# 4. An article reports on the results of a cloud-seeding experiment. 20 The 
+# question of interest is whether cloud seeding with silver nitrate increases 
+# rainfall. Out of 52 clouds, 26 were randomly selected for seeding, with the
+# remaining 26 serving as controls. The rainfall measurements, in acre-feet, 
+# are given in CloudSeedingData.txt. Use the R commands given in Example 1.8-4 
+# to construct a comparative boxplot and comment on possible differences in 
+# rainfall between seeded and unseeded clouds.
 
 ## --- Set working directory and read data in ---
 setwd('/home/scott/Documents/STAT401/akritas_datasets/')
