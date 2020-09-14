@@ -1,0 +1,322 @@
+---
+title: "Homework 2"
+author: "Scott Dolan"
+date: "9/13/2020"
+output:
+  html_document: default
+  pdf_document: default
+df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(png)
+```
+
+Page 47-49  #1, 3, 4, 5, 11, 14, 16, 17, 19  
+
+## Problem 1  
+
+> An experiment is conducted to determine the optimal time and temperature
+combination for baking a cake. The response variable of interest is taste.
+Four batches of cake will be baked separately at each combination of baking
+times (25 and 30 minutes) and temperature settings (275 $^oF$, 300 $^oF$, and 325 $^oF$).
+
+```{r}
+times = c(25,30)
+temps = c(275,300,325)
+combos = expand.grid(times,temps)
+dat1 = data.frame(times,temps,'t'=combos[1:6,1],'T'=combos[1:6,2])
+dat1
+```
+
+(a) What are the experimental units?  
+
+The experimental units are the batches of cake
+
+(b) What are the factors in this experiment?  
+
+The factors in this experiment is time and temperature.  
+
+(c) State the levels of each factor.  
+
+The time has two levels, 25 and 30 minutes and the temperature has three levels, 275, 300 and 325 $^oF$.  
+
+(d) List all the treatments in this experiment. 
+
+1) time: 25 min, temp: 275 $^oF$
+
+2) time: 25 min, temp: 300 $^oF$
+
+3) time: 25 min, temp: 325 $^oF$
+
+4) time: 30 min, temp: 275 $^oF$
+
+2) time: 30 min, temp: 300 $^oF$
+
+3) time: 30 min, temp: 325 $^oF$
+
+(e) Is the response variable qualitative or quantitative?
+
+The response variable is taste which is qualitative
+
+## Problem 3 
+> A quantification of coastal water quality converts measurements on several 
+pollutants (arsenic in oyster shells, mercury, etc.) to a water quality index
+with values from 1 to 10. An investigation into the after-clean-up waterquality
+of a lake analyzes water samples collected from five areas encompassing the two
+beaches on the eastern shore and the three beaches on the western shore. Let
+$μ_1$ and $μ_2$ denote the mean water quality index for the beaches on the eastern
+shore, and $μ_3$, $μ_4$, and $μ_5$ be the mean water quality index for the beaches
+on the westernshore.
+
+(a) Write the contrasts that represent the effects of each of the five areas.
+
+The contrasts representing the effects of each of the five areas are: 
+
+ > $\mu_1-\mu$
+ 
+ > $\mu_2-\mu$
+ 
+ > $\mu_3-\mu$
+ 
+ > $\mu_4-\mu$
+ 
+ > $\mu_5-\mu$
+
+(b) Write the contrast for comparing the water quality around the two beaches
+on the eastern shore with that around the three beaches on the western shore.
+
+
+ > $\frac{\mu_1 + \mu_2}{2}\,-\frac{\mu_3+\mu_4+\mu_5}{3}$
+ 
+## Problem 4
+
+> An article reports on the results of a cloud-seeding experiment. 20 The 
+question of interest is whether cloud seeding with silver nitrate increases 
+rainfall. Out of 52 clouds, 26 were randomly selected for seeding, with the
+remaining 26 serving as controls. The rainfall measurements, in acre-feet, 
+are given in CloudSeedingData.txt. Use the R commands given in Example 1.8-4 
+to construct a comparative boxplot and comment on possible differences in 
+rainfall between seeded and unseeded clouds.
+
+Set working directory and read data in
+
+```{r}
+#if(getwd()!='/home/scott/Documents/STAT401/akritas_datasets/'){
+setwd('/home/scott/Documents/STAT401/akritas_datasets/')
+dat4 = read.table('/home/scott/Documents/STAT401/akritas_datasets/CloudSeedingData.txt',header=T)
+head(dat4)
+w = stack(dat4) # stacks data and assigns indices
+boxplot(w$values~w$ind, col = rainbow(4),ylab='Rainfall [acre-feet]',xlab='')
+title('Comparing Rainfall for Unseeded and Seeded Clouds')
+```
+
+> Problem 4 Comments
+
+As shown in the boxplot, the control group received less rain than the
+seeded group did. The median of the control group is less than the median of
+seeded group. The minimum of the seeded group is close to the minimum of the
+control group however the maximum rainfall of the seeded group is over twice
+the maximum of the control. Both groups have outliers with the control having 3
+and the seeded having 4.
+Including Plots
+
+## Problem 5
+
+> For its new generation of airplanes, a commercial airline is considering 
+three new designs of the control panel as possible alternatives to the current
+design with the aim of improving the pilot’s response time to emergency 
+displays. Letting μ 1 denote the mean pilot response time to simulated 
+emergency conditions with the current design, and μ 2 , μ 3 , and μ 4 denote 
+the mean response times with the three new designs, write the control versus 
+treatment contrasts.
+
+The contrasts for the control vs. treatment are:
+
+$\mu_1-\mu_2$
+
+$\mu_1-\mu_3$
+  
+$\mu_1-\mu_4$
+
+## Problem 11
+
+> Import the data on monthly online and catalog sales of a company into the
+R object oc using oc = read.table(”MonthlySalesOC.txt”, header = T).
+
+```{r}
+setwd('/home/scott/Documents/STAT401/akritas_datasets/')
+dat11 = read.table('MonthlySalesOC.txt',header=T)
+```
+
+> (a) Use R commands similar to those in Example 1.8-5 to construct a bar graph 
+comparing the online and catalog volumes of sale.
+
+```{r}
+m = rbind(dat11$Online, dat11$Catalog)
+# creates a data matrix
+barplot(m, names.arg = dat11$Month, col = c('darkblue', 'red'), 
+        legend.text = c('Online','Catalog'), beside = T, las = 2,ylab='Volume of Sales [units]',xlab='Month')
+title('Bar Graph Comparing the Online and Catalog Volumes of Sale')
+```
+
+> (b) Use R commands similar to those in Example 1.8-6 to construct a stacked
+bar graph showing the breakdown of the total volume of sales into online and
+catalog.
+
+```{r}
+barplot(m, names.arg = dat11$Month, col = c('darkblue', 'red'), ylim = c(0,115),
+        legend.text = c('Online','Catalog'), beside = F, las = 2,ylab='Volume of Sales [units]',xlab='Month')
+title(' Bar Graph Showing the Breakdown of the Total Volume of Sales into 
+Online and Catalog')
+```
+> (c) Comment on the relative advantages of each of the two types of plots.
+
+The stacked bar plot provides a good visual of the total volume of sales.
+The side by side bar plot makes it easy to compare catalog and online sales
+with each other month to month or for any month. 
+
+## Problem 14
+
+> A study is initiated to compare the effect of two levels of fertilization 
+and two levels of watering on the yield per bushel for a variety of corn. One
+hundred bushels are to be grown under each of the four combinations of 
+fertilization and watering.
+
+> (a) How many populations are involved in this study?
+
+There are four populations representing the 4 unique treatments in this study.
+
+> (b) The population(s) involved is (are) hypothetical: True or false?
+
+False
+
+> (c) The variable of interest is qualitative: True or false?
+
+False
+
+> (d) List the factors and their levels involved in this study.
+
+factors: fertilization, watering
+fertilization levels: A, B
+watering levels: 1, 2
+
+> (e) Suppose the experiment will be carried out on two farms, one using 
+traditional pest control practices and one that uses organic practices. To
+avoid confounding the factors in this study with the potentially influential
+factor of pest control practices, all fertilization and watering levels must 
+be applied to both farms. True or false?
+
+True
+
+## Problem 16
+
+> Pygmalion was a mythical king of Cyprus who
+sculpted a figure of the ideal woman and then fell in love
+with his own creation. The Pygmalion effect in psychology refers
+to a situation where high expectations of a
+supervisor translates into improved performance by subordinates. 
+A study was conducted in an army training
+camp using a company of male recruits and one of female
+recruits. Each company had two platoons. One platoon in
+each company was randomly selected to be the Pygmalion
+platoon. At the conclusion of basic training, soldiers
+took a battery of tests. The following table gives the
+population mean scores for female (F) and male (M) soldiers. 
+PP denotes the Pygmalion platoon and CP denotes
+the control platoon.
+
+```{r}
+matrix1 <- cbind(c('μ 11 = 8','μ 21 = 10','μ .1 = 9','β 1 = -1.75'),c('μ 12 = 13','μ 22 = 12','μ .2 = 12.5','β 2 = 1.75'),c('μ 1. = 10.5','μ 2. = 11','μ = 10.75',' '),c('α 1 = -0.25','α 2 = 0.25',' ',' '))
+rownames(matrix1) <- c('F','M','column averages','column effects')
+colnames(matrix1) <- c('CP','PP','row averages','row effects')
+matrix1
+```
+
+> (a) Is this an additive design? Justify your answer.
+
+This is not an additive design because an interaction does exist. See part (c).
+In an additive design no interaction exists. 
+
+> (b) Compute the main gender effects and the main Pygmalion effect.
+
+> The main gender effects are $\alpha_1$ = -0.25 and $\alpha_2$ = 0.25
+
+> The main Pygmalion effect is $\beta_2$ = 1.75
+
+> (c) Compute the interaction effects.
+
+> $\gamma_11 = \mu_11-(\mu+\alpha_1+\beta_1)$ = 8 - 10.75 + 0.25 + 1.75 = 0
+
+> $\gamma_12 = \mu_12-(\mu+\alpha_1+\beta_2)$ = 13 - 10.75 + 0.25 - 1.75 = 0.75
+
+> $\gamma_21 = \mu_21-(\mu+\alpha_2+\beta_1)$ = 10 - 10.75 - 0.25 + 1.75 = 0.75
+
+> $\gamma_22 = \mu_22-(\mu+\alpha_2+\beta_2)$ = 12 - 10.75 - 0.25 - 1.75 = -0.75
+
+## Problem 17
+
+![Problem 17 Hand Drawn Interaction Plot](/home/scott/Documents/STAT401/assignments/scott/handplot.png)
+
+> (c) Compute the main pH effects and the main temperature effects.
+
+```{r}
+
+mcm = rbind (c(108,103,101,100),c(111,104,100,98))
+alphas=rowMeans(mcm)-mean(mcm) # the vector of main row effects
+betas=colMeans(mcm)-mean(mcm) # the vector main column effects
+gammas=t(t(mcm-mean(mcm)-alphas) -betas) # the matrix of
+cat(paste0('The main pH effects are: ','\n',alphas[1],'\n',alphas[2]))
+cat(paste0('The main temperature effects are: \n',betas[1],'\n',betas[2],'\n',betas[3]))
+cat('(d) Compute the interaction effects.')
+cat(paste('The interaction effects matrix:\n',show(gammas)))
+
+```
+
+## Problem 19
+
+> The data file AdLocNews.txt contains the number
+of inquiries regarding ads placed in a local newspa-
+per. The ads are categorized according to the day of
+the week and in which section of the newspaper they
+appeared. Use R to:
+
+
+> (a) Compute the cell means and the main and interaction
+effects for the factors day and newspaper section. Is
+there an overall best day to place a newspaper ad?
+Is there an overall best newspaper section to place
+the ad in?
+
+```{r}
+dat = read.table('/home/scott/Documents/STAT401/akritas_datasets/AdLocNews.txt',header=T)
+mcm=tapply(dat$Inquiries, dat[,c(1, 3)], mean)
+cat("The cell means are: ")
+mcm
+alphas=rowMeans(mcm)-mean(mcm) # the vector of main row effects
+betas=colMeans(mcm)-mean(mcm) # the vector main column effects
+gammas=t(t(mcm-mean(mcm)-alphas) -betas) # the matrix of
+cat(paste0('The main row effects are: ','\n',alphas[1],'\n',alphas[2]))
+cat(paste0('The main column effects are: \n',betas[1],'\n',betas[2],'\n',betas[3]))
+cat('(d) Compute the interaction effects.')
+cat(paste('The interaction effects matrix:\n',show(gammas)))
+```
+> (b) Construct an interaction plot with the levels of the
+factor day being traced. Construct an interaction plot
+with section being the trace factor. W
+
+```{r}
+dat = read.table('/home/scott/Documents/STAT401/akritas_datasets/AdLocNews.txt',header=T)
+attach(dat) # so variables can be referred to by name
+interaction.plot(Section, Day, Inquiries, col=c('red','blue','green','cyan','purple'), lty = 1,
+xlab='Section [units]', ylab='Inquiries [units]', trace.label
+='Day')
+title('Interaction plot the levels of the factor day being traced')
+interaction.plot(Day, Section, Inquiries, col=c('red','blue','green','cyan','purple'), lty = 1,
+xlab='Day [units]', ylab='Inquiries [units]', trace.label
+='Section')
+title('Interaction plot with section being the trace factor')
+```
