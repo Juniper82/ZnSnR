@@ -54,7 +54,7 @@ cat(paste0('The population standard deviation is: ',sigma))
 
 ```{r}
 set.seed(111)
-pmf.s <- sample(pop,size=1000,replace=T,prob=pmf.p)
+pmf.s <- sample(0:6,size=1000,replace=T,prob=pmf.p)
 ```
 
 >6. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
