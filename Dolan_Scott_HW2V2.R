@@ -85,14 +85,15 @@ dat4 = read.table('CloudSeedingData.txt',header=T)
 head(dat4)
 w = stack(dat4) # stacks data and assigns indices
 boxplot(w$values~w$ind, col = rainbow(4),ylab='Rainfall [acre-feet]',xlab='')
+title('Comparing Rainfall for Unseeded and Seeded Clouds')
 
 ## --- Problem 4 Comments ---
-# As shown in the boxplot, the control group received alot less rain than the 
-# seeded group did. The mean of the control group is less than half the mean of 
-# seeded group. The minimum of the seeded group is close to the control group
-# however the maximum rainfall of the seeded group is over twice the maxium of
-# the control. Both groups have outliers with the control having 3 and the seeded
-# having 4. 
+# As shown in the boxplot, the control group received less rain than the 
+# seeded group did. The median of the control group is less than the median of 
+# seeded group. The minimum of the seeded group is close to the minimum of the 
+# control group however the maximum rainfall of the seeded group is over twice 
+# the maximum of the control. Both groups have outliers with the control having 3 
+# and the seeded having 4. 
 
 # 5. For its new generation of airplanes, a commercial airline is considering 
 # three new designs of the control panel as possible alternatives to the current
@@ -115,16 +116,37 @@ dat11 = read.table('MonthlySalesOC.txt',header=T)
 
 m = rbind(dat11$Online, dat11$Catalog)
 # creates a data matrix
-barplot(m, names.arg = dat11$Month, ylim = c(0, 20),
-        col = c('darkblue', 'red'), legend.text = c('Online','Catalog'),
-        beside = T, las = 2) # constructs the bar graph
+barplot(m, names.arg = dat11$Month, col = c('darkblue', 'red'), 
+        legend.text = c('Online','Catalog'), beside = T, las = 2,ylab='Volume of Sales [units]',xlab='Month')
+title('Bar Graph Comparing the Online and Catalog Volumes of Sale')
 # (b) Use R commands similar to those in Example 1.8-6 to construct a stacked
 # bar graph showing the breakdown of the total volume of sales into online and
 # catalog.
-
+barplot(m, names.arg = dat11$Month, col = c('darkblue', 'red'), ylim = c(0,115),
+        legend.text = c('Online','Catalog'), beside = F, las = 2,ylab='Volume of Sales [units]',xlab='Month')
+title(' Bar Graph Showing the Breakdown of the Total Volume of Sales into 
+Online and Catalog')
 
 # (c) Comment on the relative advantages of each of the two types of plots.
 
+## The stacked bar plot provides a good visual of the total volume of sales.
+# The side by side bar plot makes it easy to compare catalog and online sales
+# with each other month to month or for any month. 
+
+# 14. A study is initiated to compare the effect of two levels of fertilization 
+# and two levels of watering on the yield per bushel for a variety of corn. One
+# hundred bushels are to be grown under each of the four combinations of 
+# fertilization and watering.
+# (a) How many populations are involved in this study?
+
+# (b) The population(s) involved is (are) hypothetical: True or false?
+# (c) The variable of interest is qualitative: True or false?
+# (d) List the factors and their levels involved in this study.
+# (e) Suppose the experiment will be carried out on two farms, one using 
+# traditional pest control practices and one that uses organic practices. To
+# avoid confounding the factors in this study with the potentially influential
+# factor of pest control practices, all fertilization and watering levels must 
+# be applied to both farms. True or false?
 
  
  

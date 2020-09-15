@@ -2,7 +2,9 @@
 title: "STAT 401"
 author: "Zackary Scalyer"
 date: "9/13/2020"
-output: html_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 <!-- use regular html style comments like this -->  
@@ -33,7 +35,7 @@ two spaces at the end of a line, or a empty line, will make a line brake in the 
 > An experiment is conducted to determine the optimal time and temperature
 combination for baking a cake. The response variable of interest is taste.
 Four batches of cake will be baked separately at each combination of baking
-times (25 and 30 minutes) and temperature settings (275 o F, 300 o F, and 325 o F).
+times (25 and 30 minutes) and temperature settings (275 $^oF$, 300 $^oF$, and 325 $^oF$).
 
 <!-- block quotes starts with >.
 note that there is no spaces at the end of each line so the final document keeps the text together.-->  
@@ -51,7 +53,7 @@ dat1
 
 (a) What are the experimental units?  
 
-The experimental units are minutes for the time and $^oF$ for temperature.  
+The experimental units are the batches of cake
 
 <!-- anything wrapted in $ is for LaTex expressions -->
 
