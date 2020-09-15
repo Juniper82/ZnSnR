@@ -21,7 +21,7 @@ given by a student who has not studied assumes that each question is marked T or
 >1. Create an expanded grid of all possible outcomes (0’s and 1’s). 
 
 ```{r}
-allOutcomes <- expand.grid(X1=0:1, X2=0:1, X3=0:1, X4=0:1, X5=0:1, X6=0:1)
+allOutcomes <- expand.grid(X1=0:1, X2=0:1, X3=0:1, X4=0:1, X5=0:1)
 allOutcomes
 ```
 
@@ -30,22 +30,22 @@ allOutcomes
 ```{r}
 allOutcomes %>% 
   attach()
-  pop=X1+X2+X3+X4+X5+X6
-  pmf.p <- table(pop)/length(table(rowSums(allOutcomes))) 
+  X=X1+X2+X3+X4+X5
+  pmf.p <- table(X)/length(allOutcomes) 
   pmf.p
 ```
 
 >3. Using the PMF, use R to construct a histogram of “test scores.” 
 
 ```{r}
-hist(pop, freq=FALSE)
+hist(X, freq=FALSE)
 ```
 
 >4. Use R to calculate the population mean and population standard deviation of test scores.
 
 ```{r}
-mu <- mean(pop)
-sigma <- sqrt(var(pop)*((length(pop)-1)/length(pop)))
+mu <- mean(X)
+sigma <- sqrt(var(X)*((length(X)-1)/length(X)))
 cat(paste0('The population mean is: ',mu))
 cat(paste0('The population standard deviation is: ',sigma))
 ```
@@ -54,14 +54,15 @@ cat(paste0('The population standard deviation is: ',sigma))
 
 ```{r}
 set.seed(111)
-pmf.s <- sample(0:6,size=1000,replace=T,prob=pmf.p)
+s <- sample(0:5,size=1000,replace=T,prob=pmf.p)
+pmf.s <- table(s)/length(s)
 ```
 
 >6. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
 
 ```{r}
-mu.s <- mean(pmf.s)
-sigma.s <- sqrt(var(pmf.s)*((length(pmf.s)-1)/length(pmf.s)))
+mu.s <- mean(s)
+sigma.s <- sd(s)
 cat(paste0('The population mean is: ',mu.s))
 cat(paste0('The population standard deviation is: ',sigma.s))
 ```
@@ -71,6 +72,13 @@ cat(paste0('The population standard deviation is: ',sigma.s))
 ```{r}
 hist(pmf.s,freq=F)
 ```
+
 >8. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
 
+```{r}
+mu.s <- mean(s)
+sigma.s <- sd(s)
+cat(paste0('The population mean is: ',mu.s))
+cat(paste0('The population standard deviation is: ',sigma.s))
+```
 >9. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
