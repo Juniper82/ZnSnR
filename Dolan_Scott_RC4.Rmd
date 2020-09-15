@@ -1,0 +1,66 @@
+---
+title: "R Competency Check #4"
+author: "Scott Dolan"
+date: "9/15/2020"
+output: html_document
+df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(png)
+```
+
+# PMF of a 5 Question True/False Test
+
+>A test consists of five true-false problems. A reasonable model for the answer 
+given by a student who has not studied assumes that each question is marked T or F by flipping a coin. Thus, any 5-long binary sequence of 0’s (incorrect) and 1’s 
+(correct), that is, points received in each of the five questions, is equally likely. Let X denote the test score of such a student. Use R to do the following:
+
+>1. Create an expanded grid of all possible outcomes (0’s and 1’s). 
+
+```{r}
+allOutcomes <- expand.grid(X1=0:1, X2=0:1, X3=0:1, X4=0:1, X5=0:1, X6=0:1)
+allOutcomes
+```
+
+>2. Create a PMF (probability mass function) for X=test score. Name this pmf.p.
+
+```{r}
+allOutcomes %>% 
+  attach()
+  pop=X1+X2+X3+X4+X5+X6
+  pmf.p <- table(pop)/length(table(rowSums(allOutcomes))) 
+  pmf.p
+```
+
+>3. Using the PMF, use R to construct a histogram of “test scores.” 
+
+```{r}
+hist(pop, freq=FALSE)
+```
+
+>4. Use R to calculate the population mean and population standard deviation of test scores.
+
+```{r}
+mu <- mean(pop)
+sigma <- sqrt(var(pop)*((length(pop)-1)/length(pop)))
+cat(paste0('The population mean is: ',mu))
+cat(paste0('The population standard deviation is: ',sigma))
+```
+
+>5. Set the seed to (111) and based on your pmf.p, take a SRS of size 1000 of “test scores.” Use this sample to create the PMF of the sample (call it pmf.s).
+
+```{r}
+set.seed(111)
+pmf.s <- sample(pop,size=1000,replace=T,prob=pmf.p)
+```
+
+>6. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
+
+>7. Using the sample PMF (pmf.s), use R to construct a histogram of sampled “test scores.” 
+
+>8. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
+
+>9. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
