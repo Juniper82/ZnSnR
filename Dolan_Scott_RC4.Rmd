@@ -2,8 +2,9 @@
 title: "R Competency Check #4"
 author: "Scott Dolan"
 date: "9/15/2020"
-output: html_document
-df_print: paged
+output: 
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -54,7 +55,7 @@ cat(paste0('The population standard deviation is: ',sigma))
 
 ```{r}
 set.seed(111)
-s <- sample(0:5,size=1000,replace=T,prob=pmf.p)
+s <- sample(X,size=1000:5,replace=T,prob=pmf.p)
 pmf.s <- table(s)/length(s)
 ```
 
@@ -73,12 +74,5 @@ cat(paste0('The population standard deviation is: ',sigma.s))
 hist(pmf.s,freq=F)
 ```
 
->8. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
 
-```{r}
-mu.s <- mean(s)
-sigma.s <- sd(s)
-cat(paste0('The population mean is: ',mu.s))
-cat(paste0('The population standard deviation is: ',sigma.s))
-```
->9. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
+>8. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
