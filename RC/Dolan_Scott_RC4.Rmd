@@ -2,8 +2,9 @@
 title: "R Competency Check #4"
 author: "Scott Dolan"
 date: "9/15/2020"
-output: html_document
-df_print: paged
+output: 
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -38,23 +39,31 @@ allOutcomes %>%
 >3. Using the PMF, use R to construct a histogram of “test scores.” 
 
 ```{r}
-hist(X, freq=FALSE)
+hist(X, breaks=seq(-0.5, 5.5, 1), freq=F, col="darkblue", xaxt="n", yaxt="n", ylab = 'Density [units]', xlab="Test Score [points]",
+     main="Probability Distribution for all Outcomes of Test Score", cex.main=1.5, cex.axis=1, cex.lab=1, font.lab=2)
+axis(2, tck=1, col.ticks="light gray", lwd.ticks="1")
+axis(2, tck=-0.015)
+axis(1,tck=-.015)
+box()
+hist(X, add=TRUE, breaks=seq(-0.5, 5.5, 1), freq=F, col="darkblue", xaxt="n", yaxt="n", ylab = 'Density', xlab="Test Score [units]",
+     main="Probability Distribution for all Outcomes of Test Score", cex.main=1.5, cex.axis=1, cex.lab=1,            font.lab=2)
 ```
 
 >4. Use R to calculate the population mean and population standard deviation of test scores.
 
 ```{r}
-mu <- mean(X)
-sigma <- sqrt(var(X)*((length(X)-1)/length(X)))
-cat(paste0('The population mean is: ',mu))
-cat(paste0('The population standard deviation is: ',sigma))
+mu.p <- mean(X)
+sigma.p <- sqrt(var(X)*((length(X)-1)/length(X)))
+cat(paste0('The population mean is: ',mu.p))
+cat(paste0('The population standard deviation is: ',sigma.p))
 ```
 
 >5. Set the seed to (111) and based on your pmf.p, take a SRS of size 1000 of “test scores.” Use this sample to create the PMF of the sample (call it pmf.s).
 
 ```{r}
 set.seed(111)
-s <- sample(0:5,size=1000,replace=T,prob=pmf.p)
+size.s = 1000
+s <- sample(0:5,size=size.s,replace=T,prob=pmf.p)
 pmf.s <- table(s)/length(s)
 ```
 
@@ -63,22 +72,25 @@ pmf.s <- table(s)/length(s)
 ```{r}
 mu.s <- mean(s)
 sigma.s <- sd(s)
-cat(paste0('The population mean is: ',mu.s))
-cat(paste0('The population standard deviation is: ',sigma.s))
+cat(paste0('The sample mean is: ',mu.s))
+cat(paste0('The sample standard deviation is: ',sigma.s))
 ```
 
 >7. Using the sample PMF (pmf.s), use R to construct a histogram of sampled “test scores.” 
 
 ```{r}
-hist(pmf.s,freq=F)
+hist(s, breaks=seq(-0.5, 5.5, 1),freq=F, col="darkblue", xaxt="n", yaxt="n", ylab = 'Density [units]', xlab="Test Score [points]",
+     main="Probability Distribution for Sample of 1000 Test Scores", cex.main=1.5, cex.axis=1, cex.lab=1, font.lab=2)
+axis(2, tck=1, col.ticks="light gray", lwd.ticks="1")
+axis(2, tck=-0.015)
+axis(1,tck=-.015)
+box()
+hist(s, add=TRUE, breaks=seq(-0.5, 5.5, 1),freq=F, col="darkblue", xaxt="n", yaxt="n", ylab = 'Density', xlab="Test Score [units]",
+     main="Probability Distribution for Sample of 1000 Test Scores", cex.main=1.5, cex.axis=1, cex.lab=1,            font.lab=2)
 ```
 
->8. Use R to calculate the sample mean and sample standard deviation of your 1000 sampled “test scores.”
+>8. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
 
-```{r}
-mu.s <- mean(s)
-sigma.s <- sd(s)
-cat(paste0('The population mean is: ',mu.s))
-cat(paste0('The population standard deviation is: ',sigma.s))
-```
->9. Compare and contrast the Shape, Center and Spread of the pmf.p and the pmf.s.
+The shape of both histograms show a normal distribution which appears Gaussian having a bell shaped curve.
+However, the sample of 1000 better shows the center to be a test score of 2 while the population is centered on a test score of 2 and 3. 
+The spread of both appear to be very similar with highest probabilities being near the center.
