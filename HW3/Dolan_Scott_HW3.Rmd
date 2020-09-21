@@ -1,0 +1,427 @@
+---
+title: "Homework 3"
+author: "Scott Dolan"
+date: "9/20/2020"
+output:
+  html_document: 
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(png)
+library(VennDiagram)
+```
+> Page 59 #2, 5, 9, 10
+
+> Page 71-73 #1, 2, 5, 7, 9, 11, 14
+
+## Page 59 Problem 2
+
+> 2. In a certain community, 40% of the households sub-
+scribe to a local newspaper, 30% subscribe to a newspaper
+of national circulation, and 60% subscribe to at least one
+of the two types of newspapers. Let E 1 denote the event
+that a randomly chosen household subscribes to a local
+newspaper, and let E 2 denote the corresponding event for
+the national newspaper.
+
+> (a) Make a Venn Diagram showing events E 1 and E 2 and
+shade the region representing the 60% of the house-
+holds that subscribe to at least one of the two types of
+newspapers.
+
+![Problem 2 Part a) Hand Drawn Ven Diagrams](/home/scott/Documents/STAT401/assignments/scott/HW3page59P2a.png)
+
+> (b) Make a Venn Diagram showing events E 1 and E 2 and
+shade the event that a randomly selected household
+subscribes to both types of newspapers.
+
+![Problem 2 Part b) Hand Drawn Ven Diagrams](/home/scott/Documents/STAT401/assignments/scott/HW3page59P2b.png)
+> (c) Make a Venn Diagram showing events E 1 and E 2 and
+shade the event that a randomly selected household
+subscribes only to a local newspaper.
+
+![Problem 2 Part c) Hand Drawn Ven Diagrams](/home/scott/Documents/STAT401/assignments/scott/HW3page59P2c.png)
+
+## Page 59 Problem 5
+
+> 5. In testing the lifetime of components, the sample space
+is the set S = {x:x > 0} of positive real numbers. Let A
+be the event that the next component tested will last less
+than 75 time units and B the event that it will last more
+than 53 time units. In mathematical notation, A = {x:x <
+75}, and B = {x:x > 53}. Describe each of the events
+
+> (a) $A^c$ 
+
+$A^c$ represents the compliment of A and is the set of all real numbers greater than or equal to 75
+
+$$A^c\subset S = \{x:x \geq 75\}$$
+
+> (b) A ∩ B
+
+$A\cap B$ is the intersection of A and B and is the set of all real numbers greater than 53 and less than 75
+
+$$A\cap B = \{x:53<x<75\}$$
+
+> (c) A ∪ B
+
+$A\cup B$ is the union of A and B and is the set of all real numbers greater than 0 and less than 75
+
+$$A\cup B = \{x:0<x<75\}$$
+
+> (d) (A − B)
+
+$(A - B)$ is the set of all real numbers greater than zero and less than 53
+
+$$(A - B)=\{x:0<x\leq53\}$$
+
+## Page 59 Problem 9
+
+> 9. In measuring the diameter of a cylinder to the
+nearest millimeter the sample space (in cm) is S =
+{5.3, 5.4, 5.5, 5.6, 5.7}. Five cylinders are randomly selected
+and their diameters are measured to the nearest
+millimeter.
+
+```{r}
+x = c(5.3,5.4,5.5,5.6,5.7)
+S_x = data.frame(expand.grid(x1=x, x2=x, x3=x, x4=x, x5=x)) # lists all triplets in S1
+```
+
+> (a) Describe the sample space of this experiment. What is
+the size of this sample space?
+
+The sample space $S_x$ for this experiement is the set of quintuplets where $S_x = \{x_1,x_2,x_3,x_4,x_5\}$ where $x_1$ = {5.3, 5.4, 5.5, 5.6, 5.7}, $x_2$ = {5.3, 5.4, 5.5, 5.6, 5.7},...$x_5$ = {5.3, 5.4, 5.5, 5.6, 5.7}. 
+The size of the sample space $S_x$ is :
+```{r}
+cat(paste0(dim(S_x)[1],' possible outcomes.'))
+```
+
+> (b) Describe the sample space if only the average of the
+five measurements is recorded, and use R commands
+similar to those used in Example 2.2-3 to determine
+the size of this sample space.
+
+This sample space is the set of distinct averages where the averages are:
+$\frac{x_1+x_2+x_3+x_4+x_5}{5}\newline$ and the size of this sample space is: 
+```{r}
+cat(paste0(length(table(rowSums(S_x)))), 'possible distinct outcomes.')
+```
+
+## Page 59 Problem 10
+
+> 10. A random sample of 100 polycarbonate plastic disks
+are categorized according to their hardness and shock
+absorption. The results are shown in the table below.
+
+![](/home/scott/Documents/STAT401/assignments/scott/P59P10table.png)
+
+> A disk is selected at random. Define the events $E_1$ = {the
+disk has low hardness}, $E_2$ = {the disk has low shock
+absorption}, $E_3$ = {the disk has low shock absorption or
+low hardness}.
+
+> (a) How many of the 100 disks belong in each of the three
+events?
+
+$E_1$ has 5 + 16 = 21 disks. $E_2$ has 5 + 9 = 14 disks. $E_3$ has 21 + 14 - 5 disks
+
+> (b) Make two drawings of a Venn diagram showing the
+events $E_1$ and $E_2$ . On the first drawing shade the
+event ($E_1\cap E_2$)$^c$ and on the second shade the event
+$E_1^c \cup E_2^c$ . Confirm the second of De Morgan’s Laws
+for these events.
+
+![](/home/scott/Documents/STAT401/assignments/scott/P59P10b.png)
+
+> (c) Describe in words the events $E_1\cap E_2 , E_1\cup E_2 , E_1 − E_2$ ,
+and ($E_1 − E_2) \cup (E_2 − E_1$).
+
+$E_1\cap E_2$ is the intersection of $E_1 & E_2$ which is the overlapping region of $E_1 & E_2$
+
+$E_1\cup E_2$ is the union of $E_1 & E_2$ represents everthing that is in $E_1 or E_2$ which includes all of $E_1 and E_2$
+
+$(E_1-E_2)\cup (E_2-E_1)$ is all of $E_1 & E_2$ minus the intersection of $E_1 & E_2$
+
+(d) How many of the 100 disks belong in each of the
+events in part (c)?
+
+$E_1\cap E_2$ has 5 disks, $E_1\cup E_2$ has 30 disks, and $(E_1-E_2)\cup (E_2-E_1)$ has 25 disks
+![](/home/scott/Documents/STAT401/assignments/scott/HW3P10d.png)
+
+## Page 71 Problem 1
+
+> 1. In electronics, a wafer is a thin slice of semiconductor
+material used in the fabrication of integrated circuits and
+other micro-devices. They are formed of highly pure crystalline material, which is doped (i.e., impurity atoms are
+added) to modulate its electrical properties. The doping
+is either n-type or p-type. Moreover, the doping is either
+light or heavy (one dopant atom per 100 million atoms,
+or per ten thousand atoms, respectively). The following
+table shows a batch of 10 wafers broken down into the
+four categories.
+
+![](/home/scott/Documents/STAT401/assignments/scott/P73P1.png)
+
+> One wafer is selected at random. Let $E_1$ denote the
+event that the selected wafer is n-type, and $E_2$ the event
+that the wafer is heavily doped. Find the probabilities
+$P(E_1 ), P(E_2 ), P(E_1 ∩ E_2 ), P(E_1 ∪ E_2 ), P(E_1 − E_2 ), and
+P((E_1 − E_2 ) ∪ (E_2 − E_1 ))$.
+
+$P(E_1)$ = 2 + 3 = 5
+
+$P(E_2)$ = 3 + 2 = 5 
+
+$P(E_1 ∩ E_2 )$ = 3 
+
+$P(E_1 ∪ E_2)$ = 5 + 5 -3 = 7
+
+$P(E_1 − E_2)$ = 5 - 3 = 2
+
+$P((E_1 − E_2 ) ∪ (E_2 − E_1 ))$ = 2 + 2 = 4
+
+## Page 71 Problem 2
+
+> 2. Refer to Exercise 1.![](/home/scott/Documents/STAT401/assignments/scott/P73P1.png)
+
+> (a) Select two wafers, at random and with replacement,
+from the batch of 10 wafers given in the exercise.
+
+```{r}
+set.seed(111)
+x = c(rep('n-light',2),rep('n-heavy',3),rep('p-light',3),rep('p-heavy',2))
+x
+X = data.frame(expand.grid(x1=x, x2=x))
+S_x = sample(x,2,replace=T)
+S_x
+```
+
+> (i) Give the sample space for the experiment that
+records the doping type of the two wafers and
+the probability for each outcome.
+
+The sample space for 2(a)(i) is: 
+```{r}
+x = c('Light','Heavy')
+Sxa = expand.grid(x1=x,x2=x)
+l = dim(Sxa)[1]
+Sxa
+```
+P(light) = 0%, P(heavy) = 100%
+
+> (ii) Give the sample space of the experiment that
+records the number of n-type wafers among the
+two selected and the corresponding probability
+mass function.
+
+The sample space for 2(a)(ii) is: 
+```{r}
+x = c('n-light','n-heavy')
+Sxa2 = expand.grid(x1=x,x2=x)
+Sxa2
+pmf.s <- table(Sxa2)
+pmf.s
+```
+
+> (b) Select four wafers, at random and with replacement,
+from the batch of 10 wafers given in the exercise.
+
+```{r}
+Sxb = sample(x,4,replace=T)
+Sxb
+```
+
+> (i) Give a verbal description of the sample space
+for the experiment that records the dop-
+ing type of the four wafers, find the size
+of the sample space using the R commands
+G=expand.grid(W1=0:1,W2=0:1,W3=0:1,W4=
+0:1); length(G$W1), and give the probability
+of each outcome.
+
+sample space consists of 2 n and 2 p type, n = 0, p = 1
+
+```{r}
+G=expand.grid(W1=0:1,W2=0:1,W3=0:1,W4=0:1); length(G$W1)
+```
+
+n type has a probability of 1/8 and p type has a probability of 1/8
+
+> (ii) Give the sample space of the experiment that
+records the number of n-type wafers among
+the four selected and the corresponding PMF
+using the additional R commands attach(G);
+table((W1+W2+W3+W4)/4)/length(W1).
+
+```{r}
+attach(G);
+table((W1+W2+W3+W4)/4)/length(W1)
+```
+
+> (iii) Use the probability mass function to find the
+probability of at most one n-type wafer among
+the four selected.
+
+I am pretty unsure about this problem and am going to have to say I don't know the answer and this is like a riddle to me at this point.
+
+## Page 71 Problem 5
+
+> 5. The R command S=expand.grid(X1=1:6, X2=1:6) gen-
+erates the sample space of two die rolls. The additional R
+command attach(S); Y=(X1==6)+(X2==6) generates the
+number of times a six occurs for each of the 36 outcomes
+in the sample space. Finally, the additional R commands
+pr=table(Y)/36; pr generates the probability mass func-
+tion for the experiment that records the number of times
+a six occurs in two rolls of a die.
+
+> (a) Use the PMF obtained and R commands similar to
+those given in (2.3.7) to simulate 10 replications of
+the experiment that records the number of times a six
+occurs in two die rolls.
+
+```{r}
+set.seed(111)
+S=expand.grid(X1=1:6, X2=1:6)
+attach(S); Y=(X1==6)+(X2==6)
+pr=table(Y)/36;
+sample(2:12, size = 10, replace = T, prob = c(1:6, 5:1)/36)
+```
+
+> (b) Use the PMF obtained and R commands similar
+to those given in (2.3.8), namely x= sample(0:2,
+size=10000, replace=T, prob=pr); table(x)/10000, to
+obtain the relative frequencies for each outcome in
+the sample space of the experiment that records the
+number of times a six occurs in two die rolls, based on
+10,000 replications.
+
+```{r}
+x= sample(0:2,size=10000, replace=T, prob=pr); table(x)/10000
+```
+
+> (c) Use the R command hist(x,seq(-0.5, 2.5, 1), freq=F);
+lines(0:2, pr, type=”p”, col=”red”); lines(0:2, pr,
+type=”h”, col=”red”) to construct a histogram of
+the relative frequencies and line graph of the probability mass function. This figure provides
+empirical verification of which property?
+
+```{r}
+hist(x,seq(-0.5, 2.5, 1), freq=F)
+lines(0:2, pr, type="p", col="red")
+lines(0:2, pr, type="h", col="red")
+```
+
+This figure provides verification of the probability mass function.
+
+## Page 72 Problem 7
+
+> 7. An information technology company will assign four
+electrical engineers to four different JAVA program-
+ming projects (one to each project). How many different
+assignments are there?
+
+What is four factorial, 24 assignments?
+
+## Page 72 Problem 9
+
+> 9. Twelve individuals want to form a committee of
+four.
+
+> (a) How many committees are possible?
+
+```{r}
+x = 1:12
+cat('There are ',dim(expand.grid(x1=x,x2=x,x3=x,x4=x))[1],' commitees possible')
+```
+
+> (b) The 12 individuals consist of 5 biologists, 4 chemists,
+and 3 physicists. How many committees consisting of
+2 biologists, 1 chemist, and 1 physicist are possible?
+
+```{r}
+# x = c(rep('bio',5),rep('chem',4),rep('phys',3))
+# Sx = expand.grid(x1=x,x2=x,x3=x,x4=x)
+# Y = c('bio','bio','chem','phys')
+# Sy  = expand.grid(y1 = Y,y2 = Y, y3 = Y, y4 = Y)
+# A = (Sx==Y)
+# dim(A)[1]
+cat(paste0('There are :',12^4/2^4,' committees possible'))
+```
+
+> (c) In the setting of part (b), if all committees are equally
+likely, what is the probability the committee formed
+will consist of 2 biologists, 1 chemist, and 1 physicist?
+
+```{r}
+cat(paste0('The probability is : ',(12^4/2^4)/12^4),'%')
+```
+
+## Page 72 Problem 11
+
+> 11. A path going from the lower left corner of the grid in
+Figure 2-7 to the upper right corner can be represented as
+a binary sequence having four 0’s and four 1’s, with each 0
+representing a move to the right and each 1 representing
+a move upwards.
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW3P11.png)
+> (a) How many paths going from the lower left corner to
+the upper right corner of this grid are there?
+
+```{r}
+
+cat(paste0('There are ',factorial(8)/(factorial(4)^2),' routes possible'))
+```
+> (b) How many paths going from the lower left corner to
+the upper right corner of this grid and passing through
+the circled point are there?
+
+```{r}
+cat(paste0('There are ',factorial(5)/(factorial(3)*factorial(2)),' routes possible'))
+```
+
+> (c) If a path is selected at random, what is the probability
+it will pass through the circled point?
+
+```{r}
+cat(paste0('The probability is:' ,(factorial(5)/(factorial(3)*factorial(2)))/(factorial(8)/(factorial(4)^2))))
+```
+
+## Page 72 Problem 14
+
+> 14. A forest contains 30 moose of which six are captured,
+tagged, and released. A certain time later, five of the 30
+moose are captured.
+
+> (a) How many samples of size five are possible?
+
+```{r}
+cat(paste0('There are ',factorial(30)/(factorial(30-5))),' samples possible')
+```
+
+> (b) How many samples of size five, which include two of
+the six tagged moose, are possible?
+
+```{r}
+cat(paste0('There are ',(factorial(24)/factorial(24-3))*(factorial(6)/factorial(6-2))),' samples possible')
+```
+
+> (c) If the five captured moose represent a simple random
+sample drawn from the 30 moose (six of which are
+tagged), find the probability that 
+
+> (i) two of the five captured moose are tagged and 
+
+The probability that 2 of 5 moose captured are tagged is 364320/17100720 = 0.0213
+
+> (ii) none of the five
+captured moose is tagged.
+
+The probability that 0 of 5 moose captured are tagged is 5100480/17100720 = 0.2983
+
+
