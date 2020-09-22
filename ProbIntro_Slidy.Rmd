@@ -1,0 +1,182 @@
+---
+title: "Probability Introduction Slidy Presentation"
+author: "Zackary Scalyer"
+date: "9/21/2020"
+output: 
+  slidy_presentation:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Definitions
+
+Sample Space  
+: The set of all possible outcomes from an experiment, S.  
+
+### Three ways to represent a sample space  
+
+- list the possible outcomes  
+
+- create a tree diagram  
+
+- create a Venn diagram  
+
+An Event  
+: Any combination of outcomes in a sample space, $A \subset S$.  
+
+Mutually Exclusive 
+: Two events are said to be ME if $\{A \cap B\} = \emptyset$.  
+
+
+## Four Equalities  
+
+Distrubutive laws  
+
+$$A \cap \{B \cup C\} = \{A \cap B\} \cup \{A \cap C\}$$  
+
+$$A \cup \{B \cap C\} = \{A \cup B\} \cap \{A \cup C\}$$  
+
+De Morgan's laws  
+
+$$\overline{\{A \cap B\}} = \overline{A} \cup \overline{B}$$  
+
+$$\overline{\{A \cup B\}} = \overline{A} \cap \overline{B}$$  
+
+
+## Axioms of Probability  
+: Let S be a sample space, where $A,B \subset S$  
+
+1. $Pr(A) \ge 0$
+
+2. $Pr(S) = 1$  
+
+3. If $\{A \cap B\} = \emptyset$, then $Pr(A \cup B) = Pr(A) + Pr(B)$  
+
+
+## Properties of Probability  
+
+1. $Pr(\emptyset) = 0$  
+
+2. $0 \le Pr(A) \le 1$  
+
+3. If $A \subset B$, then $Pr(A) \le Pr(B)$.  
+
+4. $Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)$  
+
+5. $Pr(\overline{A}) = 1-Pr(A)$  
+
+6. $Pr(\overline{A} \cap B) = Pr(B) - Pr(A \cap B)$  
+
+7. If $A_i \cap A_j = \emptyset, i \ne j$, then $Pr(\bigcup\limits_{i=1}^n A_i) = \sum\limits_{i=1}^n Pr(A_i)$  
+
+## The Simple Point Method  
+: for finding the probability of an event  
+
+1. Define the event and clearly determine how to describe an event.  
+
+2. Define the sample space as a list of simple events. 
+
+$$A_i \cap A_j = \emptyset, i \ne j$$  
+
+3. Assine reasonable probabilities to the simple points.  
+
+4. Define the event of interest as a specific collections of simple events as A.  
+
+$$A = \bigcup\limits_{i=1}^n A_i | A_i \cap A_j = \emptyset, i \ne j$$  
+
+5. Find $Pr(A)$ as the sum of probibilites.Define the event of intrest as a specific collections of simple events as A.  
+
+$$Pr(A) = \sum\limits_{i=1}^n Pr(A_i)$$  
+
+
+## Counting Simple points  
+
+### The $mn$ Rule  
+: With a set of $m$ elements and a set of $n$ elements, it is possible to form $mn$ peirs containing one element from each.  
+
+The $mn$ rule can be extended to any number of sets. Combinding two sets froms a new set and inturn $mn$ becomes $m_1m_2n$  
+
+Counting Princple  
+: If you can preform an experiment in $m$ ways and for every outcome, another experiment in $n$ ways, you have $mn$ ways.  
+
+> An experiment involes tossing a pair of dice and observing the number on each upper face. Find the number of simple points in the sample space.  
+
+***  
+
+> Concider an experiment that consits of recording the birth dates of 20 people. Assuming that there are 365 equaly likly days for each, what is the probility that all 20 people have different birthdays?  
+
+How many simple points for the sample space?
+
+$365^{20}$  
+
+How many simple points in the event that all 20 people have different birthdays?  
+
+$365\times364\times363\times362\times...\times346 = \frac{365!}{345!}$  
+
+Therefore, 
+
+$Pr(A) = \frac{1}{365^{20}}\frac{365!}{345!}$   
+
+***  
+
+### Permutation: The ordered arrangment of $r$ objects
+
+The number of ways to order $n$ distent objects taken $r$ at a time can be expresssed as factorials.  
+
+$$P_r^n = \frac{n!}{(n-r)!}$$   
+
+
+> Concider the experiment where 3 people are choosen at random form a group of 30 with out replacement. The first will recive \$100, the second will recive \$50 and the last will recive \$25. Find the number of simple points in this sample space.  
+
+Because order matters and no person can be choosen twice,  
+
+$S_n = P_{30}^{3} = \frac{30!}{27!}$  
+
+
+***  
+
+### Permutation: with repets
+
+The number of ways to order $n$ objects with $n_1 + n_2 + ... + n_k = n$, k distant objects.    
+
+$$\frac{n!}{n_1!n_2! \dots n_k!} \equiv \binom{n}{n_1n_2 \dots n_k}$$  
+
+Know as the multinomial coeffieient  
+
+
+***  
+
+
+### Combenations: order doent matter  
+
+The number of undrdered subsets of size $r$ taken with out relacemnt from $n$ objects is the number of combenations of $n$ objects taken $r$ at a time.  
+
+$\binom{n}{r} = C_r^n = \frac{P_r^n}{r!} = \frac{n!}{r!(n-r)!}$  
+
+> How many ways can one choose 2 objects from $\{A,B,C\}$?  
+
+> Alternitivly, how many permutations are there of ${T,T,L}$  
+
+
+***  
+
+
+> How many 5 card hands are in a deak of 52 cards?  
+
+$$\binom{52}{5} = \frac{P_5^{52}}{5!} = \frac{P_{47}^{52}}{47!} = \binom{52}{47}$$  
+
+Do you choose what you get or what you leave?  
+
+
+***  
+
+
+### Special case  
+
+$\binom{n}{0} = \frac{n!}{0!(n-0)!} \equiv 1$  
+
+$\binom{n}{n} = \frac{n!}{n!0!} \equiv 1$  
