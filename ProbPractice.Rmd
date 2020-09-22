@@ -1,0 +1,85 @@
+---
+title: "Probability Practice"
+author: "Zackary Scalyer"
+date: "9/22/2020"
+output: 
+  html_document:
+    code_folding: show
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Wackerly, D., Mendenhall, W., & Scheaffer, R. L. (2014). *Mathematical statistics with applications*. Cengage Learning.   
+
+## Exercise 3.1 p. 90 {.tabset .tabset-fade .tabset-pills}  
+
+> When the health department tested private wells in a count for two impurities commonly found in drinking water, it found that 20% of the wells had neither impurity, 40% had impurity A, and 50% had impurity B. If a well is randomly chosen from those in the county, find the probability distribution for $Y$, the number of impurities found in the well.  
+
+### Your Turn  
+
+Recall, De Morgan's laws  
+
+$$\overline{\{A \cap B\}} = \overline{A} \cup \overline{B}$$  
+
+$$\overline{\{A \cup B\}} = \overline{A} \cap \overline{B}$$  
+
+### Soln  
+
+The sample space is the collection of simple events $\{0,1,2\}$  
+
+Let $Y$ be a random varable that can take the values $y = \{0,1,2\}$  
+
+*Note: $Y$ represents the sample space of our experiment as a random variable, and $y$ represents a sample of the experiment as an observed value of the random variable.*   
+
+We want the probability distrabution for $Y$  
+
+$p_Y(y) = Pr(Y=y)$ is a real-valued function for the random varable Y that can take the values $y = \{0,1,2\}$  
+
+Where, 
+
+$y = 0$ is the event $\{\overline{A} \cap \overline{B}\}$ nether A and no B impurities found.  
+
+$y = 1$ is the event $\{\overline{A} \cap B\} \cup \{\overline{B} \cap A\}$ one impurity found.  
+
+$y = 2$ is the event $\{A \cap B\}$ two impurities found.  
+
+Since 20% of the wells had neither impurity  
+
+$p_Y(0) =Pr(Y=0) = 0.2$ there is a 20% chance that a random well does not have impurities  
+
+using De Morgan's law and the propertie of a complament event probability
+
+$Pr(\overline{A} \cap \overline{B}) = Pr(\overline{\{A \cup B\}}) = 1 - Pr(A \cup B) = 20\%$  
+
+we have, 
+
+$Pr(A \cup B) = 1 - 0.2 = 0.8$  
+
+another propertie of probability  
+
+$Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)$  
+
+$0.8 = 0.4 + 0.5 - Pr(A \cap B)$  
+
+returns 
+
+$Pr(A \cap B) = 0.1$ the probibility of finding two impurities in a random well  
+
+What is the probibility of finding one impuritie?  
+
+$Pr(\{\overline{A} \cap B\} \cup \{\overline{B} \cap A\}) = Pr(\overline{A} \cap B) + Pr(\overline{B} \cap A)\\ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\;\,= Pr(B) - Pr(A \cap B) + Pr(A) - Pr(A \cap B)\\ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\;\,= 0.5 + 0.4 - 2 \times 0.1\\ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\;\, = 0.7$  
+
+Therefore, the probability distrabution for the discrete random varable  
+
+| $Y = y$ | $Pr(Y = y)$ |
+|---------|-------------|
+| 0 | 0.2 |  
+| 1 | 0.7 |  
+| 2 | 0.1 |  
+
+
+***  
+
