@@ -34,7 +34,7 @@ Mutually Exclusive
 
 ## Four Equalities  
 
-Distrubutive laws  
+Distributive laws  
 
 $$A \cap \{B \cup C\} = \{A \cap B\} \cup \{A \cap C\}$$  
 
@@ -96,11 +96,11 @@ $$Pr(A) = \sum\limits_{i=1}^n Pr(A_i)$$
 ## Counting Simple points  
 
 ### The $mn$ Rule  
-: With a set of $m$ elements and a set of $n$ elements, it is possible to form $mn$ peirs containing one element from each.  
+: With a set of $m$ elements and a set of $n$ elements, it is possible to form $mn$ pairs containing one element from each.  
 
-The $mn$ rule can be extended to any number of sets. Combinding two sets froms a new set and inturn $mn$ becomes $m_1m_2n$  
+The $mn$ rule can be extended to any number of sets. Combining two sets from a new set and in turn $mn$ becomes $m_1m_2n$  
 
-Counting Princple  
+Counting Principle  
 : If you can preform an experiment in $m$ ways and for every outcome, another experiment in $n$ ways, you have $mn$ ways.  
 
 > An experiment involes tossing a pair of dice and observing the number on each upper face. Find the number of simple points in the sample space.  
@@ -132,7 +132,7 @@ $$P_r^n = \frac{n!}{(n-r)!}$$
 
 > Concider the experiment where 3 people are choosen at random form a group of 30 with out replacement. The first will recive \$100, the second will recive \$50 and the last will recive \$25. Find the number of simple points in this sample space.  
 
-Because order matters and no person can be choosen twice,  
+Because order matters and no person can be chosen twice,  
 
 $S_n = P_{30}^{3} = \frac{30!}{27!}$  
 
@@ -145,7 +145,7 @@ The number of ways to order $n$ objects with $n_1 + n_2 + ... + n_k = n$, k dist
 
 $$\frac{n!}{n_1!n_2! \dots n_k!} \equiv \binom{n}{n_1n_2 \dots n_k}$$  
 
-Know as the multinomial coeffieient  
+Know as the multinomial coefficient  
 
 
 ***  
@@ -153,7 +153,7 @@ Know as the multinomial coeffieient
 
 ### Combenations: order doent matter  
 
-The number of undrdered subsets of size $r$ taken with out relacemnt from $n$ objects is the number of combenations of $n$ objects taken $r$ at a time.  
+The number of unordered subsets of size $r$ taken with out replacement from $n$ objects is the number of combinations of $n$ objects taken $r$ at a time.  
 
 $\binom{n}{r} = C_r^n = \frac{P_r^n}{r!} = \frac{n!}{r!(n-r)!}$  
 
