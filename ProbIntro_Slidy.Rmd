@@ -82,13 +82,13 @@ $$\overline{\{A \cup B\}} = \overline{A} \cap \overline{B}$$
 
 $$A_i \cap A_j = \emptyset, i \ne j$$  
 
-3. Assine reasonable probabilities to the simple points.  
+3. Assign reasonable probabilities to the simple points.  
 
 4. Define the event of interest as a specific collections of simple events as A.  
 
 $$A = \bigcup\limits_{i=1}^n A_i | A_i \cap A_j = \emptyset, i \ne j$$  
 
-5. Find $Pr(A)$ as the sum of probibilites.Define the event of intrest as a specific collections of simple events as A.  
+5. Find $Pr(A)$ as the sum of probabilities.Define the event of interest as a specific collections of simple events as A.  
 
 $$Pr(A) = \sum\limits_{i=1}^n Pr(A_i)$$  
 
