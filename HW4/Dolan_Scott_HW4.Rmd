@@ -68,6 +68,28 @@ cat(paste0('The probability that the average gas milage is at least 52 MPG is: '
 ![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page78P7-2.png)
 
 ## Pages 78-79 Problem 9
-
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page78-79P9.png)
 
 ## Page 79 Problem 12
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page79P12.png)
+
+## Page 88 Problem 3
+
+> 3. The moisture content of batches of a chemical sub-
+stance is measured on a scale from 1 to 3, while the
+impurity level is recorded as either low (1) or high (2).
+Let X and Y denote the moisture content and the impu-
+rity level, respectively, of a randomly selected batch. The
+probabilities for each of the six possible outcomes of the
+experiment that records X and Y for a randomly selected
+batch are given in the following table.
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/P88P3Table.png)
+
+> Let A and B be the events that X = 1 and Y = 1,
+respectively.
+(a) Find the probability of A.
+(b) Find the conditional probability of B given A.
+(c) Find the probability mass function of the random
+variable X.
