@@ -14,14 +14,11 @@ library(tidyverse)
 library(png)
 ```
 
-$\usepackage{amssymb}$
+### Page 77-78 #1, 3, 6, 7, 9, 12
 
-> Stat 401 Homework 4
-					Due 9/27/2020
-The following homework assignments should be done using R (when appropriate).
-Page 77-78 #1, 3, 6, 7, 9, 12
-Page 88-89 #3, 6, 8, 10
-Page 96 #1, 4, 5, 10
+### Page 88-89 #3, 6, 8, 10
+
+### Page 96 #1, 4, 5, 10
 
 ## Page 77 Problem 1
 
@@ -93,3 +90,78 @@ respectively.
 (b) Find the conditional probability of B given A.
 (c) Find the probability mass function of the random
 variable X.
+
+## Page 88 Problem 6
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/P88P6.png)
+
+## Page 89 Problem 8
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page89P8.png)
+
+## Page 89 Problem 10
+
+> 10. A batch of 10 fuses contains three defective ones.
+A sample of size two is taken at random and without
+replacement.
+
+> (a) Find the probability that the sample contains no
+defective fuses.
+
+```{r}
+x = c(rep(1,3),rep(0,7)) # 1 is for defective, 0 for good fuses in a batch 
+Sx = expand.grid(x1=x,x2=x)
+attach(Sx)
+pmf.s <- table(x1+x2)/dim(Sx)[1]
+pmf.s
+cat(paste0('The probability that the sample contains no defective fuses is: ',pmf.s['0']))
+```
+
+> (b) Let X be the random variable denoting the number
+of defective fuses in the sample. Find the probability
+mass function of X.
+
+```{r}
+X = pmf.s
+X
+```
+
+> (c) Given that X = 1, what is the probability that the
+defective fuse was the first one selected?
+
+```{r} 
+pmf.Xc = table(x1==1,x2==0)/(dim(Sx)[1])
+pmf.Xc
+cat('Given that X = 1, the probability that the defective fuse was the first one selected is 21%')
+```
+
+## Page 96 Problem 1
+
+> 1. In a batch of 10 laser diodes, two have efficiency
+below 0.28, six have efficiency between 0.28 and 0.35,
+and two have efficiency above 0.35. Two diodes are
+selected at random and without replacement. Are the
+events E 1 = {the first diode selected has efficiency
+below 0.28} and E 2 = {the second diode selected
+has efficiency above 0.35} independent? Justify your
+answer.
+
+```{r}
+x = c(rep('l',2),rep('m',6),rep('h',2))
+Sx = expand.grid(x1=x,x2=x)
+attach(Sx)
+pmf.x = table(x1=='l',x2=='h')/dim(Sx)[1]
+pmf.x
+```
+
+> The events E1 and E2 are independent because E1 can happen or not happen  for the first diode 
+selected and the second diode can be any of the three levels. There are enough of each level diode 
+in any given batch to make them independent for a sample of size 2. 
+
+## Page 96 Problem 4
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page96P4.png)
+
+## Page 96 Problem 5
+
+![](/home/scott/Documents/STAT401/assignments/scott/HW4/Page96P5.png)
