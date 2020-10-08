@@ -1,0 +1,115 @@
+---
+title: 'R Competency #5'
+author: "Scott Dolan"
+date: "10/8/2020"
+output: 
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Use R to calculate the following probabilities under the given conditions.
+
+## 1. X Binomial ( x ,10, 0.40 )
+> a. P( X=5)
+
+```{r}
+dbinom(5, 10, 0.40)
+```
+
+> b. P( X> 5)
+
+```{r}
+1-pbinom(5,10,.40)
+```
+
+> c. P(3< X ≤ 7)
+
+```{r}
+sum(dbinom(4:7, 10, 0.40))
+```
+
+## 2. X Geometric ( x , .40 )
+
+> a. P ( X=5 )
+
+```{r}
+dgeom(5, 0.40)
+```
+
+> b. P ( X >5 )
+
+```{r}
+1-pgeom(5, 0.40)
+```
+
+
+> c. P(3< X ≤ 7)
+
+```{r}
+sum(dgeom(4:7, 0.40))
+```
+
+## 3. X NegativeBinomial ( x ,2, .40 )
+
+>a. P ( X=5 )
+
+```{r}
+dnbinom(5,2,.4)
+```
+
+> b. P ( X >5 )
+
+```{r}
+1-pnbinom(5,2,.4)
+```
+
+> c. P(3< X ≤ 7)
+
+```{r}
+sum(dnbinom(4:7,2,.4))
+```
+
+## 4. X HyperGeometric ( x , 20,20,10 )
+
+> a. P ( X=5 )
+
+```{r}
+dhyper(5,20,20,10)
+```
+
+> b. P ( X >5 )
+
+```{r}
+1-phyper(5,20,20,10)
+```
+
+> c. P(3< X ≤ 7)
+
+```{r}
+sum(dhyper(4:7,20,20,10))
+```
+
+## 5. X Poisson ( x ,2 )
+
+> a. P ( X=5 )
+
+```{r}
+dpois(5,2)
+```
+
+> b. P ( X >5 )
+
+```{r}
+1-ppois(5,2)
+```
+
+> c. P(3< X ≤ 7)
+
+```{r}
+sum(dpois(4:7,2))
+```
